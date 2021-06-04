@@ -24,11 +24,10 @@ loadMoreBtn.refs.button.addEventListener('click', fetchGallery);
 function onSearch(event) {
     event.preventDefault();
     
-    apiService.query = event.currentTarget.elements.query.value.trim();
+    apiService.query = refs.searchForm.elements.query.value.trim();
 
     if (apiService.query !== ' ' && apiService.query !== '' ) {
         
-    loadMoreBtn.show();
     apiService.resetPage();
     clearGalleryContainer();
     fetchGallery();
