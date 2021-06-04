@@ -28,6 +28,7 @@ function onSearch(event) {
 
     if (apiService.query !== ' ' && apiService.query !== '' ) {
         
+    loadMoreBtn.show();
     apiService.resetPage();
     clearGalleryContainer();
     fetchGallery();
