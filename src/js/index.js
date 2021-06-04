@@ -3,13 +3,12 @@ import cardTpl from '../templates/card.hbs';
 import LoadMoreBtn from './load-more-btn';
 // import { notification } from './notify';
 import error from './error';
-
+var debounce = require('lodash.debounce');
 
 const refs = {
     searchForm: document.querySelector('#search-form'),
     galleryContainer: document.querySelector('.gallery'),
 };
-
 
 const loadMoreBtn = new LoadMoreBtn({
     selector: '[data-action="load-more"]',
@@ -17,7 +16,9 @@ const loadMoreBtn = new LoadMoreBtn({
 });
 const apiService = new ApiService();
 
-refs.searchForm.addEventListener('input', onSearch);
+
+
+refs.searchForm.addEventListener('input', debounce(onSearch,300));
 loadMoreBtn.refs.button.addEventListener('click', fetchGallery);
 
 function onSearch(event) {
@@ -57,8 +58,14 @@ function fetchGallery() {
             });
         }
     });
+    setTimeout(scrollDown, 600);
+    function scrollDown() {
         
-
+        document.querySelector('.btn').scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+    }
         
 }
 
